@@ -14,7 +14,7 @@
         android:id="@+id/textViewNameId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Saima Ahmadi\nID: 12345"
+        android:text="Saima Ahmadi\nID: 1439618"
         android:textSize="25sp"
         android:textColor="@color/black"
         android:textAlignment="center"
