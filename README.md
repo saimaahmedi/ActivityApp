@@ -19,16 +19,16 @@ ActivityApp is a simple Android application that demonstrates navigation between
 ## Screenshots
 
 ### Main Activity:
-<img src="screenshots/main_activity.jpg" width="400"/>
+<img src="screenshots/main_activity.jpg"  height="500"/>
 
 ### Second Activity:
-<img src="screenshots/activity.jpg" width="400"/>
+<img src="screenshots/activity.jpg"  height="500"/>
 
 ### Image Activity:
 - **Image Activity (before)**  
-  <img src="screenshots/second_activity_before.jpg" width="400"/>
+  <img src="screenshots/second_activity_before.jpg"  height="500"/>
 - **Image Activity (After)**  
-  <img src="screenshots/second_activity.jpg" width="400"/>
+  <img src="screenshots/second_activity.jpg"  height="500"/>
 
 
 ## Prerequisites
@@ -45,7 +45,7 @@ ActivityApp is a simple Android application that demonstrates navigation between
 
 ### Clone the Repository:
 ```sh
-git clone https://github.com/your-username/ActivityApp.git
+git clone https://github.com/saimaahmedi/ActivityApp.git
 ```
 
 ### Open the Project:
@@ -138,18 +138,8 @@ implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
 
-## License
-This project is licensed under the **MIT License**. See the `LICENSE` file for details.
 
 ## Acknowledgments
 - **[Android Developers Documentation](https://developer.android.com/)**: For providing comprehensive guides and tutorials.
 - **[Material Design](https://material.io/)**: For the beautiful and intuitive UI components.
 
-## Contact
-For any questions or feedback, feel free to reach out:
-
-**Name:** Saima Ahmadi  
-**Email:** saima.ahmadi@example.com  
-**GitHub:** [saima-ahmadi](https://github.com/saima-ahmadi)
-
-Enjoy using ActivityApp! 🚀
