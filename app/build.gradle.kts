@@ -64,7 +64,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4") // Add this line
 
     // Material Components dependency
-    implementation("com.google.android.material:material:1.11.0") // Add this line
+    implementation("com.google.android.material:material:1.11.0")
+    implementation(libs.androidx.uiautomator) // Add this line
 
     // Testing dependencies
     testImplementation("junit:junit:4.13.2")
