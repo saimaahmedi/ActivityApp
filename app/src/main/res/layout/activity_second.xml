@@ -2,50 +2,36 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:background="@color/white"
     android:gravity="center"
-    tools:context=".SecondActivity">
+    android:background="@color/white">
 
-    <!-- Header -->
-<TextView
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Mobile Software Engineering Challenges"
-android:textSize="24sp"
-android:textColor="@color/black"
-android:textStyle="bold"
-android:layout_gravity="center_horizontal"
-    android:layout_marginBottom="24dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile Software Engineering Challenges"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
 
-    <!-- List of Challenges -->
-<TextView
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="1. Fragmentation\n2. Security\n3. Performance\n4. Battery Life\n5. User Experience"
-android:textSize="18sp"
-android:textColor="@color/gray"
-android:layout_gravity="center_horizontal"
-    android:layout_marginBottom="32dp"/>
+    <TextView
+        android:id="@+id/textChallenges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading..."
+        android:textSize="18sp"
+        android:layout_marginBottom="32dp" />
 
-    <!-- Button to Return to Main Activity -->
-<com.google.android.material.button.MaterialButton
-android:id="@+id/buttonMainActivity"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Main Activity"
-android:textSize="18sp"
-android:textColor="@color/white"
-app:backgroundTint="@color/purple_500"
-android:paddingVertical="16dp"
-app:icon="@drawable/home_24px"
-app:iconPadding="8dp"
-app:cornerRadius="35dp"
-app:elevation="4dp"
-android:layout_gravity="center_horizontal"
-    android:layout_marginTop="16dp"/>
-    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonMainActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Main Activity"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/purple_500"
+        app:cornerRadius="30dp"
+        app:elevation="4dp" />
+</LinearLayout>
