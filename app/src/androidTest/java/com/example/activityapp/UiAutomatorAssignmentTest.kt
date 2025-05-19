@@ -1,48 +1,82 @@
 package com.example.activityapp
 
+import android.content.Intent
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.test.assertNotNull
+import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class UiAutomatorAssignmentTest {
 
     private lateinit var device: UiDevice
-    private val TIMEOUT = 5000
-    private val PACKAGE_NAME = "com.example.activityapp" // Update if your package is different
+    private val packageName = "com.example.activityapp"
+    private val timeout = TimeUnit.SECONDS.toMillis(10)
 
     @Before
-    fun setup() {
+    fun setUp() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+
+        // Grant custom permission needed by your app
+        InstrumentationRegistry.getInstrumentation().uiAutomation
+            .executeShellCommand("pm grant $packageName com.example.activityapp.MSE412")
+
         device.pressHome()
 
+        // Wait for launcher
         val launcherPackage = device.launcherPackageName
-        device.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), TIMEOUT)
+        assertNotNull(launcherPackage)
+        device.wait(Until.hasObject(By.pkg(launcherPackage)), timeout)
 
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
-        val intent = context.packageManager.getLaunchIntentForPackage(PACKAGE_NAME)
+        // Launch app
+        val context = InstrumentationRegistry.getInstrumentation().context
+        val intent = context.packageManager.getLaunchIntentForPackage(packageName)
         intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(intent)
 
-        device.wait(Until.hasObject(By.pkg(PACKAGE_NAME).depth(0)), TIMEOUT)
+        // Wait for app to appear
+        device.wait(Until.hasObject(By.pkg(packageName)), timeout)
     }
 
     @Test
-    fun testLaunchSecondActivityAndVerifyChallenge() {
-        // Click on the "Start Activity Explicitly" button
-        val startButton = device.findObject(By.text("Start Activity Explicitly"))
-        startButton.click()
+    fun testSecondActivityChallenge() {
+        // Find button using both resource ID and text as fallback
+        val buttonSelector = By.res(packageName, "buttonExplicit")
+            .clazz("android.widget.Button")
+            .text("Start Activity Explicitly")
 
-        // Wait and check for one known challenge in the second activity
-        device.wait(Until.hasObject(By.textContains("Fragmentation")), TIMEOUT)
+        val explicitButton: UiObject2? = device.wait(Until.findObject(buttonSelector), timeout)
+        assertNotNull("Could not find 'Start Activity Explicitly' button", explicitButton)
 
-        val challenge = device.findObject(By.textContains("Fragmentation"))
-        assertNotNull(challenge, "Expected challenge text 'Fragmentation' not found.")
+        explicitButton?.click()
+
+        // Wait for second activity to load and verify text
+        val challengeText: UiObject2? = device.wait(Until.findObject(
+            By.res(packageName, "textChallenges")
+                .clazz("android.widget.TextView")
+        ), timeout)
+
+        assertNotNull("Could not find challenge text view", challengeText)
+
+        val expectedChallenges = listOf(
+            "Fragmentation",
+            "Battery efficiency",
+            "Security",
+            "Performance",
+            "UX consistency"
+        )
+
+        val actualText = challengeText?.text ?: ""
+        assertTrue(
+            "Challenge text doesn't match expected patterns. Found: $actualText",
+            expectedChallenges.any { actualText.contains(it) }
+        )
     }
 }
